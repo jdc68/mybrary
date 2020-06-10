@@ -5,14 +5,14 @@ const Author = require('../models/author');
 // All authors route
 router.get('/', async(req, res) => {
     let searchOptions = {}
-    if (req.query.name != null && req.query.name !== '') {   // Check if the input is not empty -> otherwise filter
+    if (req.query.name != null && req.query.name !== '') { // Check if the input is not empty -> otherwise filter
         searchOptions.name = new RegExp(req.query.name, 'i') // Search by name
     }
     try {
         const authors = await Author.find(searchOptions)
-        res.render('authors/index', { 
-            authors: authors, 
-            searchOptions: req.query 
+        res.render('authors/index', {
+            authors: authors,
+            searchOptions: req.query
         })
     } catch {
         res.redirect('/')
@@ -31,7 +31,7 @@ router.post('/', async(req, res) => {
     })
     try {
         const newAuthor = await author.save()
-            // res.redirect(`authors/${newAuthor.id}`)
+        // res.redirect(`authors/${newAuthor.id}`)
         res.redirect(`authors`)
     } catch {
         res.render('authors/new', {

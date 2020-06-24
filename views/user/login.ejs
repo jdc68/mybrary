@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login</title>
+   <link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+   <div class="auth-page-wrapp">
+      <div class="auth-block-wrapp">
+         <div class="auth-wrapp login-wrapp">
+            <h1 class="auth-title signin-title">Sign In</h1>
+            <form action="/user/login" method="POST" class="auth-form auth-login-form">
+               <div>
+                  <label for="email">Email</label>
+                  <input type="text" id="email" name="email" required>
+               </div>
+               <div>
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="password" required>
+               </div>
+               <div id="remember-pass-wrapp">
+                  <input type="checkbox" id="remember-pass">
+                  <label for="remember-pass">Remember me</label>
+               </div>
+               <button type="submit" class="auth-submit submit-login">Sign in</button>
+            </form>
+            <p class="auth-error">
+               <% if (messages.error) { %>
+                  <%= messages.error%>
+               <% } %>
+            </p>
+            <a href="/user/register" class="auth-option create-new">Create new account</a>
+         </div>
+      </div>
+   </div>
+
+</body>
+
+</html>

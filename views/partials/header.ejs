@@ -6,6 +6,15 @@
          <li><a href="/books/new">Add Book</a></li>
          <li><a href="/authors">Authors</a></li>
          <li><a href="/authors/new">Add Author</a></li>
+         <% if (isAuthenticated) {%>
+            <li><a href="/user/account">Account</a></li>
+            <form action="/user/logout?_method=DELETE" method="POST">
+               <button type="submit">Log out</button>
+            </form>
+         <%  } else {%>   
+            <li><a href="/user/login">Sign In</a></li>
+            <li><a href="/user/register">Sign Up</a></li>
+         <% } %> 
       </ul>
    </nav>
 </header>

@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Book = require('../models/book')
 const Author = require('../models/author')
-const { render } = require('ejs')
+const User = require('../models/user')
+const { checkAuthenticated } = require('./auth')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
 
 
@@ -30,7 +31,7 @@ router.get('/', async(req, res) => {
 })
 
 // New book route
-router.get('/new', async(req, res) => {
+router.get('/new', checkAuthenticated, async(req, res) => {    
     renderNewPage(res, new Book())
 })
 
@@ -42,6 +43,7 @@ router.post('/', async(req, res) => {
         publishDate: new Date(req.body.publishDate),
         pageCount: req.body.pageCount,
         description: req.body.description,
+        contributorId: req.user.id
     })
     saveCover(book, req.body.cover)
     try {
@@ -56,7 +58,8 @@ router.post('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
     try {
         const book = await Book.findById(req.params.id).populate('author').exec()
-        res.render('books/show', { book: book })
+        const contributor = await User.findById(book.contributorId)
+        res.render('books/show', { book: book, user: req.user, contributor: contributor })
     } catch (error) {
         redirect('/')
     }

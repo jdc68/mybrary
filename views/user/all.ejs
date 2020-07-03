@@ -1,0 +1,20 @@
+<h1>All Users</h1>
+<% if (messages.succsess != null)  {%>
+    <p><%- messages.success %></p> 
+<% } %> 
+<% if (messages.error != null)  {%>
+    <p><%- messages.error %></p> 
+<% } %> 
+<table>
+    <% users.forEach(user => { %>
+        <tr>
+            <td><%- user.name %></td>
+            <td><%- user.lastname %></td>
+            <td><%- user.username %></td>
+            <td><%- user.email %></td>
+            <td><%- user.role %></td>
+            <td><a href="/user/<%= user.id %> ">View</a></td>
+            <td><%- include('../partials/deleteForm', {url: `/user/${ user.id }`}) %></td>
+        </tr>
+    <% }) %>
+</table>

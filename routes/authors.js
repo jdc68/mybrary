@@ -3,6 +3,8 @@ const router = express.Router();
 const Author = require('../models/author');
 const Book = require('../models/book');
 
+const { checkAuthenticated } = require('./auth')
+
 // All authors route
 router.get('/', async(req, res) => {
     let searchOptions = {}
@@ -20,7 +22,7 @@ router.get('/', async(req, res) => {
     }
 })
 // New author route
-router.get('/new', (req, res) => {
+router.get('/new', checkAuthenticated, (req, res) => {
     res.render('authors/new', { author: new Author() })
 })
 
@@ -40,6 +42,7 @@ router.post('/', async(req, res) => {
     }
 })
 
+// Show author
 router.get('/:id', async(req, res) => {
     try {
         const author = await Author.findById(req.params.id)
@@ -53,6 +56,7 @@ router.get('/:id', async(req, res) => {
     }
 })
 
+// Edit author
 router.get('/:id/edit', async(req, res) => {
     try {
         const author = await Author.findById(req.params.id)
@@ -62,6 +66,7 @@ router.get('/:id/edit', async(req, res) => {
     }
 })
 
+// Update author
 router.put('/:id', async(req, res) => {
     let author
     try {
@@ -82,6 +87,7 @@ router.put('/:id', async(req, res) => {
     }
 })
 
+// Delete author
 router.delete('/:id', async(req, res) => {
     let author
     try {

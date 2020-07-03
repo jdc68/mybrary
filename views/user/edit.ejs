@@ -1,0 +1,41 @@
+<div class="auth-page-wrapp">
+    <div class="auth-block-wrapp">
+       <div class="auth-wrapp register-wrapp">
+          <h1 class="auth-title signup-title">Sign Up</h1>
+          <form action="/user/register" method="POST" class="auth-form auth-register-form">
+             <div id="name-inputs">
+                <div class="name-input">
+                   <label for="name">First name</label>
+                   <input type="text" id="name" name="name" required>
+                </div>
+                <div class="name-input">
+                   <label for="lastname">Last name</label>
+                   <input type="text" id="lastname" name="lastname" required>
+                </div>
+             </div>
+             <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+             </div>
+             <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+             </div>
+             <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+             </div>
+             <p class="auth-error">
+                <% if (messages.error) { %>
+                   <%= messages.error %>
+                <% } %>
+             </p>
+ 
+          <button type="submit" class="auth-submit submit-login">Sign up</button>
+          </form>
+          <a href="/user/login" class="auth-option login">Already have an account?</a>
+       </div>
+    </div>
+ </div>
+ 
+ 

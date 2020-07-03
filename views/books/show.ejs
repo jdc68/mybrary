@@ -4,7 +4,10 @@
 <div>Publish Date: <%= book.publishDate.toDateString() %> </div>
 <div>Page Count: <%= book.pageCount %> </div>
 <div>Description: <%= book.description %> </div>
+<div>Contributor: <%= contributor.username %> </div>
 
-<a href="/books/<%= book.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm', {url: `/books/${ book.id }`}) %> 
+<% if (user !== undefined && (user.id === contributor.id || user.role === 'admin')) { %>
+    <a href="/books/<%= book.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', {url: `/books/${ book.id }`}) %>
+<% } %>
 <a href="/authors/<%= book.author.id %>">View Author</a>

@@ -5,11 +5,11 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
+const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session')
 const passport = require('passport');
-
 
 const indexRouter = require('./routes/index')
 const authorRouter = require('./routes/authors')
@@ -21,6 +21,7 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(express.static('public'));
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
 app.use(methodOverride('_method'))
 app.use(session({
@@ -39,6 +40,7 @@ db.once('open', () => { console.log('Connected to Mongoose'); })
 
 app.use(function(req, res, next) {
     res.locals.isAuthenticated = req.isAuthenticated()
+    res.locals.req = req
     next()
 })
 app.use('/', indexRouter)

@@ -7,7 +7,7 @@
          <li><a href="/authors">Authors</a></li>
          <li><a href="/authors/new">Add Author</a></li>
          <% if (isAuthenticated) {%>
-            <li><a href="/user/account">Account</a></li>
+            <li><a href="/user/<%- req.user.id %>">Account(<%- req.user.username %>)</a></li>
             <form action="/user/logout?_method=DELETE" method="POST">
                <button type="submit">Log out</button>
             </form>
